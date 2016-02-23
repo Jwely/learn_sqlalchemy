@@ -5,12 +5,14 @@ from sqlalchemy.engine.url import URL
 
 def csv_to_db(csv_path, db_path, table_name=None, **db_kwargs):
     """
+    Creates a simple database from a csv file with default sqlite driver.
 
-    :param csv_path:
-    :param db_path:
-    :param table_name:
-    :param db_kwargs:
-    :return:
+    :param csv_path:    filepath to csv
+    :param db_path:     desired filepath to destination database
+    :param table_name:  manual table_name to dump csv into, if None the table will
+                        inherit the same name as the csv file without extension
+    :param db_kwargs:   kwargs according to db adress as in `sqlalchemy.engine.url.URL`
+    :return:            database connection?
     """
 
     if os.path.exists(csv_path):
@@ -24,12 +26,12 @@ def csv_to_db(csv_path, db_path, table_name=None, **db_kwargs):
 
     url = URL(database=db_path, **db_kwargs)
     table_url = "{url}::{tbl}".format(url=url, tbl=table_name)
-    odo(csv_path, table_url)
+    return odo(csv_path, table_url)
 
 
 
 if __name__ == "__main__":
 
-    csv = '../dat/scy_dat.csv'
-    db = '../dat/scy_dat.db'
-    csv_to_db(csv, db, drivername='sqlite')
+    csv = 'dat/scy_dat.csv'
+    db = 'dat/scy_dat.db'
+    print csv_to_db(csv, db, drivername='sqlite')
