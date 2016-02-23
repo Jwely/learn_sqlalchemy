@@ -48,8 +48,8 @@ def csv_to_db(csv_path, db_path, table_name=None, **db_kwargs):
 
 if __name__ == "__main__":
 
-    csv = 'dat/scy_dat.csv'
-    db = 'dat/scy_dat.db'
+    csv = 'dat/test_dat.csv'
+    db = 'dat/test_dat.db'
     engine = csv_to_db(csv, db)
     Session = sessionmaker(bind=engine)
     sesh = Session()

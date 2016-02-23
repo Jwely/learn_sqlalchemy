@@ -1,5 +1,6 @@
 
 
 #pyton stuffs
+*.db
 *pyc
 .idea
