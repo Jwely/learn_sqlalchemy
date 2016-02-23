@@ -24,6 +24,10 @@ def csv_to_db(csv_path, db_path, table_name=None, **db_kwargs):
     if table_name is None:
         table_name = ".".join(os.path.basename(csv_path).split(".")[0:-1])
 
+    # if no driver was included in kwargs, use sqlite
+    if 'drivername' not in db_kwargs:
+        db_kwargs['drivername'] = 'sqlite'
+
     url = URL(database=db_path, **db_kwargs)
     table_url = "{url}::{tbl}".format(url=url, tbl=table_name)
     return odo(csv_path, table_url)
@@ -34,4 +38,4 @@ if __name__ == "__main__":
 
     csv = 'dat/scy_dat.csv'
     db = 'dat/scy_dat.db'
-    print csv_to_db(csv, db, drivername='sqlite')
+    print csv_to_db(csv, db)
